@@ -12,7 +12,8 @@ system requirements:
 - nodejs
 - some type of remote access service like dyndns or an external ip address if you want to use this service outside of your own network
 
-### how to configure and use in a few easy steps:
+how to configure and use in a few easy steps:
+==
 
 	- download package
 	- modify app.js, line 2: put in your imessage phone number, preceded by a + and with no punctuation of any kind. for example, 1-123-123-1234 becomes +11231231234
