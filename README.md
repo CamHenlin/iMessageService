@@ -32,6 +32,10 @@ how to configure and use in a few easy steps:
 that's it!
 =
 
+here's a screenshot of what you'll have when people start talking to you:
+
+![alt tag](http://i.imgur.com/h7svTVs.jpg)
+
 at this point i don't think any further development work on this project will be done besides bug fixes. if you're interested in a more full featured system or native client app for winphone/android please let me know on twitter @camhenlin, if there's enough interest i may continue work on the project
 
 
