@@ -3,7 +3,7 @@ hacked together imessage service
 
 ### purpose:
 
-the purpose of this project is to provide a web interface for basic imessage usage on non-apple devices and computers. ie, android, windows phone, blackberry, etc.
+the purpose of this project is to provide a web interface for basic imessage sending and receiving on non-apple devices and computers. ie, android, windows phone, blackberry, etc. capable of using a sevice like jabber to issue push notification to devices for new imessages as well.
 
 why? because i broke my iphone, got a windows phone for cheap, and didn't want to get rid of imessages since i'm switching back to iphone in a few months
 
@@ -29,7 +29,10 @@ how to configure and use in a few easy steps:
 - open your terminal, and navigate to the directory that you downloaded the package to, and type 'node app'
 - you should now be able to navigate to http://localhost:3000/app.html on the computer to confirm that the app is working. conversation will not begin to show up until new messages are sent to the imessage account that you have configured. the message app must be out of focus when this is happening!
 
+that's it!
+=
 
+at this point i don't think any further development work on this project will be done besides bug fixes. if you're interested in a more full featured system or native client app for winphone/android please let me know on twitter @camhenlin, if there's enough interest i may continue work on the project
 
 
 big thanks to https://github.com/yongjunj/AutoForwardIMessage where i got a good portion of the messages app control code
