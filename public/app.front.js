@@ -8,10 +8,10 @@ function iMessage() {
 		var chatterKeys = getKeys(this.chatters);
 		$('#chats').html("");
 		for (var i = 0; i < chatterKeys.length; i++) {
-			$('#chats').append('<span style="text-overflow:ellipsis; font-weight: bold; background-color: #EEE; margin: 4px; padding: 8px; border: 1px gray solid; font-style: bold; box-shadow: 2px 2px 5px #000;" onclick=\'imessage.displayMessages("' + chatterKeys[i] + '");\'>' + chatterKeys[i].replace(' ', '&nbsp;') + '</span>');
+			$('#chats').append('<span style="text-overflow:ellipsis; font-weight: bold; font-size: 10px; background-color: #DBDDDE; margin: 2px; padding: 4px; font-style: bold; border-bottom: 1px black solid;  border-radius: 10px;" onclick=\'imessage.displayMessages("' + chatterKeys[i] + '");\'>' + chatterKeys[i].replace(' ', '&nbsp;') + '</span>');
 		}
 
-		$('#chats').append('<span style="text-overflow:ellipsis; font-weight: bold; background-color: #EEE; margin: 4px; padding: 8px; border: 1px gray solid; font-style: bold; box-shadow: 2px 2px 5px #000;" onclick=\'imessage.refreshThread();\'>refresh</span>');
+		$('#chats').append('<span style="text-overflow:ellipsis; font-weight: bold; font-size: 10px; background-color: #DBDDDE; margin: 2px; padding: 4px; font-style: bold; border-bottom: 1px black solid; border-radius: 10px;" onclick=\'imessage.refreshThread();\'>refresh</span>');
 	};
 
 	this.displayMessages = function(chatter) {
@@ -20,18 +20,17 @@ function iMessage() {
 		var alt = true;
 		for (var i = 0; i < this.chatters[chatter].length; i++) {
 			if (this.chatters[chatter][i].id === this.myPhoneNumber) {
-				$('#chatMessages').append('<div style="background-color: #EEE; margin: 2px; padding: 4px; border: 1px gray solid;"> <b>me</b>: ' + this.chatters[chatter][i].text + '</div>');
+				$('#chatMessages').append('<div style="background-color: #007AFF; margin: 4px; padding: 8px; color: white; border-radius: 10px;"> <b>me</b>: ' + this.chatters[chatter][i].text + '</div>');
 			} else {
-				$('#chatMessages').append('<div style="background-color: #EEE; margin: 2px; padding: 4px; border: 1px gray solid;"><b>' + this.selectedChatter + "</b>: " + this.chatters[chatter][i].text + '</div>');
+				$('#chatMessages').append('<div style="background-color: #DBDDDE; margin: 4px; padding: 8px; color: black; border-radius: 10px;"><b>' + this.selectedChatter + "</b>: " + this.chatters[chatter][i].text + '</div>');
 			}
 
 		}
 
-		$('#chatMessages').append("<br><input type=\"text\" id=\"messageText\" style='width: 100%; height: 30px;'><br><div style='border: 1px black solid; padding: 5px;' onclick='imessage.sendMessage()'>send message</div>");
-
-		$('html, body').animate({
-	        scrollTop: $("#messageText").offset().top
-	    }, 50);
+		$('#chatMessages').append("<textarea rows=2 id=\"messageText\" style='margin-left: 4px; margin-right: 4px; width: 78%; height: 60px; float: left; border-radius: 10px; border: 1px solid #898C90'></textarea><div style='width: 50px; height: 35px; padding: 5px; padding-top: 17px; background-color: #DBDDDE; border-radius: 10px; float: right; text-align: center;' onclick='imessage.sendMessage()'>Send</div>");
+		setTimeout( function() {
+			$('html, body').scrollTop( $(document).height() );
+		}, 500);
 	};
 
 	this.sendMessage = function() {
@@ -52,6 +51,7 @@ function iMessage() {
 	};
 
 	this.getMessages = function() {
+		this.chatters = [];
 		$.get("/getMessages", function(data) {
 			data = JSON.parse(data);
 			for (var i = 0; i < data.messages.message.length; i++) {
@@ -73,7 +73,7 @@ function iMessage() {
 		this.getMessages();
 		setTimeout(function() {
 			this.displayMessages(this.selectedChatter);
-		}.bind(this), 100);
+		}.bind(this), 1000);
 	};
 
 	this.getMessages();
@@ -81,6 +81,13 @@ function iMessage() {
 var imessage;
 
 $(document).ready(function() {
+	$.ajaxSetup({
+	    // Disable caching of AJAX responses
+	    cache: false
+	});
+	$('html, body').animate({
+        scrollTop: 0
+    }, 50);
 	imessage = new iMessage();
 });
 

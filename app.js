@@ -16,6 +16,7 @@ app.get('/getMessages', function (req, res) {
 
 	var parser = new xml2js.Parser();
 	fs.readFile('/Users/' + process.env['LOGNAME'] + '/Desktop/textdata.xml', 'utf8', function(err, data) {
+		data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<messages>" + data;
 		data += "</messages>";
 		console.log(data);
 	    parser.parseString(data, function (err, result) {

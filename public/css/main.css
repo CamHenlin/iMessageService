@@ -18,6 +18,10 @@ textarea {
     color: #222;
 }
 
+div {
+  font-family: Neue Helvetica;
+}
+
 body {
     font-size: 1em;
     line-height: 1.4;
@@ -60,6 +64,8 @@ fieldset {
 textarea {
     resize: vertical;
 }
+
+
 
 /* ==========================================================================
    Author's custom styles
