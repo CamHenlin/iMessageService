@@ -8,10 +8,10 @@ function iMessage() {
 		var chatterKeys = getKeys(this.chatters);
 		$('#chats').html("");
 		for (var i = 0; i < chatterKeys.length; i++) {
-			$('#chats').append('<span style="text-overflow:ellipsis; font-weight: bold; font-size: 10px; background-color: #DBDDDE; margin: 2px; padding: 4px; font-style: bold; border-bottom: 1px black solid;  border-radius: 10px;" onclick=\'imessage.displayMessages("' + chatterKeys[i] + '");\'>' + chatterKeys[i].replace(' ', '&nbsp;') + '</span>');
+			$('#chats').append('<span style="text-overflow:ellipsis; font-weight: bold; font-size: 8px; background-color: #DBDDDE; margin: 2px; padding: 4px; font-style: bold; border-bottom: 1px black solid;  border-radius: 10px;" onclick=\'imessage.displayMessages("' + chatterKeys[i] + '");\'>' + chatterKeys[i].replace(' ', '&nbsp;') + '</span>');
 		}
 
-		$('#chats').append('<span style="text-overflow:ellipsis; font-weight: bold; font-size: 10px; background-color: #DBDDDE; margin: 2px; padding: 4px; font-style: bold; border-bottom: 1px black solid; border-radius: 10px;" onclick=\'imessage.refreshThread();\'>refresh</span>');
+		$('#chats').append('<br><span style="text-overflow:ellipsis; font-weight: bold; font-size: 10px; background-color: #DBDDDE; margin: 2px; padding: 4px; font-style: bold; border-bottom: 1px black solid; border-radius: 10px;" onclick=\'imessage.refreshThread();\'>Refresh</span>');
 	};
 
 	this.displayMessages = function(chatter) {
@@ -27,7 +27,7 @@ function iMessage() {
 
 		}
 
-		$('#chatMessages').append("<textarea rows=2 id=\"messageText\" style='margin-left: 4px; margin-right: 4px; width: 78%; height: 60px; float: left; border-radius: 10px; border: 1px solid #898C90'></textarea><div style='width: 50px; height: 35px; padding: 5px; padding-top: 17px; background-color: #DBDDDE; border-radius: 10px; float: right; text-align: center;' onclick='imessage.sendMessage()'>Send</div>");
+		$('#chatMessages').append("<textarea rows=2 id=\"messageText\" style='margin-left: 4px; margin-right: 4px; margin-bottom: 2px; width: 78%; height: 58px; float: left; border-radius: 10px; border: 1px solid #898C90'></textarea><div style='width: 50px; height: 35px; padding: 5px; padding-top: 17px; background-color: #DBDDDE; border-radius: 10px; float: right; text-align: center;' onclick='imessage.sendMessage()'>Send</div>");
 		setTimeout( function() {
 			$('html, body').scrollTop( $(document).height() );
 		}, 500);
@@ -53,15 +53,8 @@ function iMessage() {
 	this.getMessages = function() {
 		this.chatters = [];
 		$.get("/getMessages", function(data) {
-			data = JSON.parse(data);
-			for (var i = 0; i < data.messages.message.length; i++) {
-				var message = data.messages.message[i];
-				if (typeof(this.chatters[message.name[0]]) !== "object") {
-					this.chatters[message.name[0]] = [];
-				}
+			this.chatters = JSON.parse(data);
 
-				this.chatters[message.name[0]].push({ "chatter" : message.name[0], "text" : message.text[0], "id" : message.id[0] });
-			}
 			setTimeout(function() {
 				this.doneHandler();
 			}.bind(this), 50);
