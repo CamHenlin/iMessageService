@@ -20,10 +20,25 @@ app.get('/getMessages', function (req, res) {
 		data += "</messages>";
 		console.log(data);
 	    parser.parseString(data, function (err, result) {
-	        console.dir(result);
+	    	var chatters = {};
+	    	for (var i in result.messages.message) {
+				var message = result.messages.message[i];
+				if (typeof(chatters[message.name[0]]) !== "object") {
+					chatters[message.name[0]] = [];
+				}
+
+				chatters[message.name[0]].push({ "chatter" : message.name[0], "text" : message.text[0], "id" : message.id[0] });
+	    	}
+
+	    	for (var j in chatters) {
+	    		var chatter = chatters[j];
+	    		chatter = chatter.slice(chatter.length - 8, chatter.length);
+	    		chatters[j] = chatter;
+	    	}
+	    	console.log(chatters);
 	        console.log(err);
 	        //res.write("test");
-	        res.write(JSON.stringify(result));
+	        res.write(JSON.stringify(chatters));
 			res.end("");
 	    });
 	});
