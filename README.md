@@ -1,3 +1,5 @@
+# Deprecated by [iMessageWebClient](https://github.com/CamHenlin/iMessageWebClient)
+
 hacked together imessage service
 ===
 
