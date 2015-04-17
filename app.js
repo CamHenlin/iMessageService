@@ -37,7 +37,6 @@ app.get('/getMessages', function (req, res) {
 	    	}
 	    	console.log(chatters);
 	        console.log(err);
-	        //res.write("test");
 	        res.write(JSON.stringify(chatters));
 			res.end("");
 	    });
